@@ -1,0 +1,40 @@
+@import "~bootstrap/scss/bootstrap";
+@import "reset";
+
+html, body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+.navbar {
+  &__register {
+    margin-left: 20px;
+  }
+}
+
+.content {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  &__btn {
+    margin-top: 30px;
+  }
+}
+
+.footer {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  background-color: #343a40 !important;
+  padding: 20px;
+  color: #fff;
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+  }
+}
