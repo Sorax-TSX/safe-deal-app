@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 
 import {Container, Navbar} from "react-bootstrap";
 
-const NavBar: React.FC = () => {
+const NavBar = () => {
    return (
      <header>
         <Navbar bg="dark" variant="dark">
