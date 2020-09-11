@@ -1,9 +1,8 @@
 import React from "react";
 import {
-    BrowserRouter as Router,
     Switch,
-    Route
-} from "react-router-dom";
+    Route,
+    BrowserRouter as Router} from "react-router-dom";
 
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
@@ -15,11 +14,13 @@ import RegisterPage from "../pages/AurhPages/RegisterPage";
 
 import "./App.scss";
 
-const App: React.FC = () => {
+const App = () => {
+
     return (
       <Router>
           <NavBar/>
           <main className="container content">
+
               <Switch>
 
                   <Route exact path="/" component={Home}/>

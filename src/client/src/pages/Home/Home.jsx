@@ -1,7 +1,7 @@
 import React from "react";
 import {Button, Card, Col, Container, Row} from "react-bootstrap";
 
-const Home: React.FC = () => {
+const Home = () => {
    return (
      <Container>
         <Row>
