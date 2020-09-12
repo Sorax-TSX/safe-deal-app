@@ -1,21 +1,19 @@
 import * as React from "react";
 
-import { Form, Button } from "react-bootstrap";
 import TextInput from "../../components/TextInput";
-import { useHandleChange, useHandleSubmit } from "../../hooks/form.hook";
+import {Button, Form} from "react-bootstrap";
+import {useForm} from "../../hooks/useForm";
 
-import "./Auth.scss";
-
-const LoginPage = () => {
-    const [loginData, setLoginData] = React.useState({
-        values: {login: '', password: ''},
+const RegisterPage = () => {
+    const initState = {
+        values: {login: '', email: '', password: ''},
         errors: {}
-    });
+    };
 
-    const handleChange = useHandleChange([loginData, setLoginData]);
-    const handleSubmit = useHandleSubmit([loginData, setLoginData]);
+    const [formData, handleChange, handleSubmit] = useForm(initState)
 
-    const {values, errors} = loginData;
+    const {values, errors} = formData;
+
     return (
       <Form className="form-auth" onSubmit={handleSubmit((form) => {
           console.log(form)
@@ -30,6 +28,15 @@ const LoginPage = () => {
             onChange={handleChange}
           />
           <TextInput
+            type="email"
+            name="email"
+            value={values.email}
+            error={errors.email}
+            placeholder="Enter Email"
+            autoComplete="off"
+            onChange={handleChange}
+          />
+          <TextInput
             type="password"
             name="password"
             value={values.password}
@@ -38,10 +45,9 @@ const LoginPage = () => {
             autoComplete="off"
             onChange={handleChange}
           />
-          <Button variant="info" type="submit">Sing In</Button>
+          <Button variant="info" type="submit">Sing Up</Button>
       </Form>
     )
-};
+}
 
-export default LoginPage;
-
+export default RegisterPage;
