@@ -28,7 +28,7 @@ router.post('/login', async (req, res) => {
             return res.status(400).json({ message: 'Server 400: Wrong login or password'})
         }
 
-        const token = await jwt.sign({id: user.id}, JWT_SECRET, {expiresIn: "1h"});
+        const token = await jwt.sign({id: user.id}, JWT_SECRET, {expiresIn: "10h"});
         res.status(201).json({
             token,
             user: {

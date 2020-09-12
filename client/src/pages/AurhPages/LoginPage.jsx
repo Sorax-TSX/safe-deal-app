@@ -1,4 +1,8 @@
-import * as React from 'react';
+import * as React from "react";
+import { useHistory } from "react-router-dom";
+import { connect } from "react-redux";
+
+import { loginUser } from "../../store/actions/auth.action";
 
 import { Form, Button } from "react-bootstrap";
 import TextInput from "../../components/TextInput";
@@ -6,17 +10,23 @@ import { useForm } from "../../hooks/useForm";
 
 import "./Auth.scss";
 
-const LoginPage = () => {
+const LoginPage = ({ isAuthenticated, loginReq, loginSuccess, loginUser }) => {
+    const history = useHistory();
+
     const initState = { values: { login: '', password: ''}, errors: {}};
 
-    const [formData, handleChange, handleSubmit] = useForm(initState)
+    React.useEffect(() => {
+        if (loginSuccess) {
+            history.push('/');
+        }
+    }, [loginSuccess, history]);
+
+    const [formData, handleChange, handleSubmit] = useForm(initState);
 
     const {values, errors} = formData;
 
     return (
-      <Form className="form-auth" onSubmit={handleSubmit((form) => {
-          console.log(form)
-      })}>
+      <Form className="form-auth" onSubmit={handleSubmit(loginUser)}>
           <TextInput
             type="text"
             name="login"
@@ -35,10 +45,17 @@ const LoginPage = () => {
             autoComplete="off"
             onChange={handleChange}
           />
-          <Button variant="info" type="submit">Sing In</Button>
+          <Button variant="info" type="submit" disabled={loginReq}>Sing In</Button>
       </Form>
     )
 };
 
-export default LoginPage;
+const mapStateToProps = (state) => ({
+    loginReq: state.auth.loginReq,
+    isAuthenticated: state.auth.isAuthenticated,
+    loginSuccess: state.auth.loginSuccess
+});
 
+export default connect(mapStateToProps, { loginUser })(
+  LoginPage
+);
