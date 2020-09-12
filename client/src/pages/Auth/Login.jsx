@@ -10,7 +10,7 @@ import { useForm } from "../../hooks/useForm";
 
 import "./Auth.scss";
 
-const LoginPage = ({ isAuthenticated, loginReq, loginSuccess, loginUser }) => {
+const Login = ({ isAuthenticated, loginReq, loginSuccess, loginUser }) => {
     const history = useHistory();
 
     const initState = { values: { login: '', password: ''}, errors: {}};
@@ -57,5 +57,5 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, { loginUser })(
-  LoginPage
+  Login
 );

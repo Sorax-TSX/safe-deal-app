@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import {Button, Card, Col, Container, Row} from "react-bootstrap";
 
 const Home = () => {
@@ -13,7 +14,9 @@ const Home = () => {
                     <Card.Text>
                        This type of service was created to securely conduct transactions between sellers and buyers.
                     </Card.Text>
-                    <Button variant="outline-info">Create New Deal</Button>
+                    <Link to="/orders/new">
+                       <Button variant="outline-info">Create New Deal</Button>
+                    </Link>
                  </Card.Body>
               </Card>
            </Col>

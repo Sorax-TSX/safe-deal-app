@@ -22,8 +22,8 @@ const UserNavBlock = ({name}) => {
 
   return (
     <>
-        <Link to="/deals" className="nav-link">My Deals</Link>
-        <Link to="/balance" className="nav-link">Balance: 0.00 $</Link>
+        <Link to="/orders" className="nav-link">My Deals</Link>
+        <Link to="/balance" className="nav-link">Balance: 0 USD</Link>
         <Nav.Link href="/logout" className="nav-link" onClick={handleClick}>Logout</Nav.Link>
         <Navbar.Collapse className="justify-content-end">
             <Navbar.Text>Signed in as: {name.toUpperCase()}</Navbar.Text>
