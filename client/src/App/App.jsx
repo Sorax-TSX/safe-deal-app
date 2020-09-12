@@ -12,23 +12,32 @@ import PrivateRoute from "../routing/PrivateRoute";
 
 import Navbar from "../components/NavBar";
 import Footer from "../components/Footer";
-import Home from "../pages/Home/Home";
-import LoginPage from "../pages/AurhPages/LoginPage";
-import RegisterPage from "../pages/AurhPages/RegisterPage";
 import MessageAlert from "../components/Alert";
 import Loader from "../components/Loader";
+
+import Home from "../pages/Home/Home";
+import Login from "../pages/Auth/Login";
+import Register from "../pages/Auth/Register";
+import Balance from "../pages/Balance/Balance";
+import OrderList from "../pages/Orders/Orders";
+import OrderCreate from "../pages/Orders/OrderNew";
+
 
 import "./App.scss";
 
 const App = () => {
-    const alert = useSelector(state => state.alert);
-    const auth = useSelector(state => state.auth);
-    const loading = useSelector(state => state.auth.loadUser);
+    const stateSelector = useSelector(state => ({
+        alert: state.alert,
+        auth: state.auth,
+        loading: state.loadUser
+    }));
 
     React.useEffect(() => {
         store.dispatch(loadUser());
         store.dispatch(alertAction.clear());
     }, []);
+
+    const { alert, auth, loading } = stateSelector;
 
     return (
       <>
@@ -42,9 +51,15 @@ const App = () => {
 
                       <Route exact path="/" component={ Home }/>
 
-                      <GuestRoute exact path="/login" component={ LoginPage }/>
+                      <GuestRoute path="/login" component={ Login }/>
 
-                      <GuestRoute exact path="/register" component={ RegisterPage }/>
+                      <GuestRoute path="/register" component={ Register }/>
+
+                      <PrivateRoute exact path="/orders" component={ OrderList } />
+
+                      <PrivateRoute exact path="/orders/new" component={ OrderCreate } />
+
+                      <PrivateRoute exact path="/balance" component={ Balance } />
 
                       <Redirect from="*" to="/" />
 

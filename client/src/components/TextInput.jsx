@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { Form } from 'react-bootstrap';
 
-const TextInput = ({type, name, value, placeholder, autoComplete, error, onChange}) => {
+const TextInput = ({label, type, name, value, placeholder, autoComplete, error, onChange}) => {
     return (
       <Form.Group>
+          {label && <Form.Label>{label}</Form.Label>}
           <Form.Control
             type={type}
             name={name}

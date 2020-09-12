@@ -7,7 +7,7 @@ import TextInput from "../../components/TextInput";
 import {Button, Form} from "react-bootstrap";
 import {useForm} from "../../hooks/useForm";
 
-const RegisterPage = ({ registerReq = false, registerSuccess = false, registerUser }) => {
+const Register = ({ registerReq = false, registerSuccess = false, registerUser }) => {
     const history = useHistory();
 
     const initState = {
@@ -65,5 +65,5 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, { registerUser })(
-  RegisterPage
+  Register
 );

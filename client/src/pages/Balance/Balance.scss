@@ -1,0 +1,18 @@
+.balance {
+  color: white;
+  width: 100%;
+  padding: 20px 30px;
+
+  &__title {
+    text-align: center;
+  }
+
+  &-amount {
+    font-size: 20px;
+  }
+
+  .form-balance {
+    width: 150px;
+    margin-top: 15px;
+  }
+}
