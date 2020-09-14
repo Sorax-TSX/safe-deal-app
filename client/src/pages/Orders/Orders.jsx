@@ -5,9 +5,15 @@ import {Container, Table, Badge} from "react-bootstrap";
 
 import "./Orders.scss";
 
-const OrderItem = () => {
+const OrderItem = ({ name, status, amount, partner}) => {
     return (
-      <h1>Item</h1>
+        <tr className="order-item">
+            <td>1</td>
+            <td>{name}</td>
+            <td><Badge variant={status}>{status}</Badge></td>
+            <td>{amount} $</td>
+            <td>{partner}</td>
+        </tr>
     )
 }
 
@@ -32,13 +38,12 @@ const Orders = () => {
                       </tr>
                       </thead>
                       <tbody>
-                          <tr className="order-item">
-                              <td>1</td>
-                              <td>Buy Iphone XS MAX</td>
-                              <td><Badge variant="info">Сonfirmation</Badge></td>
-                              <td>11.00 $</td>
-                              <td>Kpokos</td>
-                          </tr>
+                          <OrderItem
+                            name="Buy Iphone XS MAX"
+                            status="info"
+                            amount="11.00"
+                            partner="Pidaras"
+                          />
                           <tr className="order-item">
                               <td>1</td>
                               <td>Buy Iphone XS MAX</td>

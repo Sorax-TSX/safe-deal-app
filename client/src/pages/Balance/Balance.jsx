@@ -1,14 +1,16 @@
 import React from "react";
 import { Form, Button } from "react-bootstrap";
 import TextInput from "../../components/TextInput";
+import { useForm } from "../../hooks/useForm";
+import { schemaFormBalance } from "../../hooks/schems";
 
 import "./Balance.scss";
-import {useForm} from "../../hooks/useForm";
+
 
 const Balance = () => {
-    const initState = { values: { amount: 0 }, errors: {}};
+    const initState = { values: { amount: '' }, errors: {}};
 
-    const [formData, handleChange, handleSubmit] = useForm(initState);
+    const [formData, handleChange, handleSubmit] = useForm(initState, schemaFormBalance);
 
     const {values, errors} = formData;
     return (
@@ -17,13 +19,15 @@ const Balance = () => {
           <hr/>
           <div className="balance__block">
               <span className="balance-amount">Current amount: 5000 USD</span>
-              <Form className="form-balance">
+              <Form className="form-balance" onSubmit={handleSubmit((form, errors) => {
+                  return !Object.keys(errors).length ? console.log(form) : false;
+              })}>
                   <TextInput
                     type="text"
-                    name="login"
+                    name="amount"
                     value={values.amount}
                     error={errors.amount}
-                    placeholder="Login"
+                    placeholder="Amount"
                     autoComplete="off"
                     onChange={handleChange}
                   />
@@ -32,6 +36,6 @@ const Balance = () => {
           </div>
       </div>
     )
-}
+};
 
 export default Balance;

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Form } from 'react-bootstrap';
 
-const TextInput = ({label, type, name, value, placeholder, autoComplete, error, onChange}) => {
+const TextInput = React.memo(({label, type, name, value, placeholder, autoComplete, error, onChange}) => {
     return (
       <Form.Group>
           {label && <Form.Label>{label}</Form.Label>}
@@ -16,6 +16,6 @@ const TextInput = ({label, type, name, value, placeholder, autoComplete, error, 
           {error && <Form.Text className="text-danger">{error}</Form.Text>}
       </Form.Group>
     )
-};
+});
 
 export default TextInput;

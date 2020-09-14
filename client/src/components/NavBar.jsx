@@ -30,9 +30,9 @@ const UserNavBlock = ({name}) => {
         </Navbar.Collapse>
     </>
   )
-}
+};
 
-const NavBar = ({auth}) => {
+const NavBar =({auth}) => {
     return (
       <header>
           <Navbar bg="dark" variant="dark">
