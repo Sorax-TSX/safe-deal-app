@@ -1,19 +1,21 @@
-import { schemaFormData } from "./auth.schems";
 import * as React from "react";
 
-export const useForm = (initState) => {
+export const useForm = (initState, schemaFormData) => {
     const [formData, setFormData] = React.useState(initState);
 
-    const handleChange = async (event) => {
-        const {name, value} = event.target;
+    const handleChange = React.useCallback(async (event) => {
+        const { target: { name, value }} = event;
+
         const errors = await schemaFormData.validateAt(name, {[name]: value}, {abortEarly: false})
-          .then(_ => ({[name]: null}))
+          .then(_ => ({[name]: ''}))
           .catch(convertErrors);
+
         setFormData((state) => ({
-            values: {...formData.values, [name]: value},
-            errors: {...state.errors, ...errors}
+            values: {...state.values, [name]: value},
+            errors: {...state.errors, ...errors},
         }));
-    };
+
+    }, [schemaFormData]);
 
      const handleSubmit = (callback) => {
         return async (event) => {
@@ -21,13 +23,13 @@ export const useForm = (initState) => {
             const errors = await schemaFormData.validate(formData.values, {abortEarly: false})
               .then(_ => ({}))
               .catch(convertErrors);
+
             setFormData((prevState) => ({
                 ...prevState,
                 errors
             }));
-            if (Boolean(Object.keys(errors).length) || !Object.keys(errors).length) {
-                callback(formData.values);
-            }
+
+            callback(formData.values, errors);
         }
     };
 

@@ -1,6 +1,7 @@
 import * as React from "react";
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
+import { schemaFormAuth } from "../../hooks/schems";
 
 import { loginUser } from "../../store/actions/auth.action";
 
@@ -10,7 +11,7 @@ import { useForm } from "../../hooks/useForm";
 
 import "./Auth.scss";
 
-const Login = ({ isAuthenticated, loginReq, loginSuccess, loginUser }) => {
+const Login = ({ loginReq, loginSuccess, loginUser }) => {
     const history = useHistory();
 
     const initState = { values: { login: '', password: ''}, errors: {}};
@@ -21,7 +22,7 @@ const Login = ({ isAuthenticated, loginReq, loginSuccess, loginUser }) => {
         }
     }, [loginSuccess, history]);
 
-    const [formData, handleChange, handleSubmit] = useForm(initState);
+    const [formData, handleChange, handleSubmit] = useForm(initState, schemaFormAuth);
 
     const {values, errors} = formData;
 
@@ -52,7 +53,6 @@ const Login = ({ isAuthenticated, loginReq, loginSuccess, loginUser }) => {
 
 const mapStateToProps = (state) => ({
     loginReq: state.auth.loginReq,
-    isAuthenticated: state.auth.isAuthenticated,
     loginSuccess: state.auth.loginSuccess
 });
 
