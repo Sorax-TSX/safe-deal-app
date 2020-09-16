@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-//Create Schema
+//Create user Schema
 const UserSchema = new Schema({
     login: {
         type: String,
@@ -14,8 +14,12 @@ const UserSchema = new Schema({
     password: {
         type: String,
         require: true
+    },
+    amount: {
+        type: Number,
+        require: true
     }
-})
+});
 
 const User = mongoose.model('user', UserSchema);
 

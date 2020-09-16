@@ -21,10 +21,10 @@ const checkAllFields = (data) => {
 const OrderCreate = React.memo(() => {
     const initState = {
         values: {
-            name: '',
+            description: '',
             partner: '',
-            initiator: 'seller',
-            amount: ''
+            role: 'seller',
+            amountOrder: ''
         },
         errors: {},
     };

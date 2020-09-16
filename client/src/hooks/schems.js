@@ -19,7 +19,7 @@ export const schemaFormAuth = Y.object().shape({
 });
 
 export const schemaFormOrder = Y.object().shape({
-    name: Y.string()
+    description: Y.string()
         .required("Order name is Required!")
         .min(5, "Minimum 4 characters")
         .max(50, "Maximum 50 characters")
@@ -31,7 +31,7 @@ export const schemaFormOrder = Y.object().shape({
         .max(20, "Maximum 20 characters")
         .matches(/^[A-Za-z0-9]+$/, "Only latin characters & numbers"),
 
-    initiator: Y.string()
+    role: Y.string()
         .required("Role is Required!"),
 
     amount: Y.number()

@@ -2,11 +2,12 @@ const express = require('express');
 const mongoose = require('mongoose');
 const config = require('config');
 const cors = require('cors');
-
+const currency = require('currency.js');
 const app = express();
 
 //Routes
 const authRoutes = require('./routes/users/auth.route');
+const orderRoutes = require('./routes/orders/order.route');
 
 //Middleware
 app.use(express.json());
@@ -30,6 +31,7 @@ const MONGO_URI = config.get('database.mongo_uri');
 
 //Use Routes
 app.use('/api/user', authRoutes);
+app.use('/api/deal', orderRoutes);
 
 const PORT = config.get('app.port') || 5000;
 app.listen(5000, () => {

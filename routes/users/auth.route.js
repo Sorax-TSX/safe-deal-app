@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 
 const authMiddleware = require('../../middlewares/auth.middleware');
 
-const User = require('../../models/user.schema');
+const modelUser = require('../../models/user.schema');
 
 const JWT_SECRET = config.get('app.jwt_secret');
 
@@ -17,7 +17,7 @@ const JWT_SECRET = config.get('app.jwt_secret');
 router.post('/login', async (req, res) => {
     try {
         const { login, password } = req.body;
-        const user = await User.findOne({ login });
+        const user = await modelUser.findOne({ login });
         if (!user) {
             return res.status(400).json({ message: 'Server 400: User is not found'})
         }
@@ -34,7 +34,7 @@ router.post('/login', async (req, res) => {
             user: {
                 id: user.id,
                 login: user.login,
-                status: user.status
+                amount: user.amount
             }
         })
     } catch (err) {
@@ -51,19 +51,20 @@ router.post('/login', async (req, res) => {
 router.post('/register', async (req, res) => {
     try {
         const { login, email, password } = req.body;
-        const userExist = await User.findOne({login});
+        const userExist = await modelUser.findOne({login});
         if (userExist) {
             return res.status(400).json({ message: 'User with this login is already registered' });
         }
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
-        const newUser = new User({
+        const newUser = new modelUser({
             login,
             email,
             password: hashedPassword,
+            amount: "0.00"
         });
         await newUser.save();
-        res.status(201).json({ message: 'R\egistration completed successfully' })
+        res.status(201).json({ message: 'Registration completed successfully' })
     } catch (err) {
         throw err;
     }
@@ -78,7 +79,7 @@ router.post('/register', async (req, res) => {
 router.get('/auth', authMiddleware, async (req, res) => {
     try {
         const { user } = req;
-        const userData = await User.findById(user.id).select('-password');
+        const userData = await modelUser.findById(user.id).select('-password');
         if (!userData) throw Error('User is not found');
         res.json(userData);
     } catch (e) {
