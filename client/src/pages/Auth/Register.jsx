@@ -1,11 +1,13 @@
 import * as React from "react";
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
+
+import { useForm } from "../../hooks/useForm";
+import { schemaFormAuth } from "../../hooks/schems";
 import { registerUser } from "../../store/actions/auth.action";
 
 import TextInput from "../../components/TextInput";
 import {Button, Form} from "react-bootstrap";
-import {useForm} from "../../hooks/useForm";
 
 const Register = ({ registerReq = false, registerSuccess = false, registerUser }) => {
     const history = useHistory();
@@ -21,7 +23,7 @@ const Register = ({ registerReq = false, registerSuccess = false, registerUser }
         }
     }, [registerSuccess, history])
 
-    const [formData, handleChange, handleSubmit] = useForm(initState)
+    const [formData, handleChange, handleSubmit] = useForm(initState, schemaFormAuth);
 
     const {values, errors} = formData;
 
