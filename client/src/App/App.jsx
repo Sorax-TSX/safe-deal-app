@@ -52,13 +52,13 @@ const App = () => {
 
                       <Route exact path="/" component={ Home }/>
 
-                      <GuestRoute path="/login" component={ Login }/>
+                      <GuestRoute exact path="/login" component={ Login }/>
 
-                      <GuestRoute path="/register" component={ Register }/>
+                      <GuestRoute exact path="/register" component={ Register }/>
 
                       <PrivateRoute exact path="/deals" component={ OrderList } />
 
-                      <PrivateRoute path="/deals/new" component={ OrderCreate } />
+                      <PrivateRoute exact path="/deals/new" component={ OrderCreate } />
 
                       <PrivateRoute exact path="/deals/order/:id" component={ Order } />
 
