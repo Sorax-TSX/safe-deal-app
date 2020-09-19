@@ -1,4 +1,6 @@
 import React from "react";
+import { connect } from "react-redux";
+import { addAmount } from "../../store/actions/auth.action";
 import { Form, Button } from "react-bootstrap";
 import TextInput from "../../components/TextInput";
 import { useForm } from "../../hooks/useForm";
@@ -7,7 +9,8 @@ import { schemaFormBalance } from "../../hooks/schems";
 import "./Balance.scss";
 
 
-const Balance = () => {
+const Balance = ({ user, addAmount }) => {
+
     const initState = { values: { amount: '' }, errors: {}};
 
     const [formData, handleChange, handleSubmit] = useForm(initState, schemaFormBalance);
@@ -18,9 +21,9 @@ const Balance = () => {
           <h3 className="balance__title">Financial Cabinet</h3>
           <hr/>
           <div className="balance__block">
-              <span className="balance-amount">Current amount: 5000 USD</span>
+              <span className="balance-amount">Current amount: {user.amount} USD</span>
               <Form className="form-balance" onSubmit={handleSubmit((form, errors) => {
-                  return !Object.keys(errors).length ? console.log(form) : false;
+                  return !Object.keys(errors).length ? addAmount({...form, login: user.login}) : false;
               })}>
                   <TextInput
                     type="text"
@@ -38,4 +41,11 @@ const Balance = () => {
     )
 };
 
-export default Balance;
+const mapStateToProps = (state) => ({
+   user: state.auth.user
+});
+
+
+export default connect(mapStateToProps, { addAmount })(
+    Balance
+);

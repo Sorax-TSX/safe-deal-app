@@ -1,10 +1,10 @@
 {
     "app": {
         "port": 5000,
-        "jwt_secret": "secret_jwt_eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6AkivaG4"
+        "jwt_secret": ""
     },
     "database": {
-        "mongo_uri": "mongodb+srv://testername:RDHqBBVdplp7NEYU@safe-deal.fhmeq.mongodb.net/dealdb?retryWrites=true&w=majority",
-        "passwordDB": "RDHqBBVdplp7NEYU"
+        "mongo_uri": "",
+        "passwordDB": ""
     }
 }

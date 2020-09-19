@@ -47,3 +47,11 @@ export const schemaFormBalance = Y.object().shape({
         .min(100, "Minimum 100 currency")
         .max(100000, "Maximum 100 000 currency")
 });
+
+export const schemaFormOrderMessage = Y.object().shape({
+    message: Y.string()
+        .required("Login is Required!")
+        .min(4, "Minimum 4 characters")
+        .max(100, "Maximum 20 characters")
+        .matches(/^[A-Za-zА-Яа-яЁё0-9 ]+$/, "Only latin, cyrillic characters & numbers"),
+});

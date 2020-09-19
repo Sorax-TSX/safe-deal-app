@@ -6,20 +6,17 @@ const OrderSchema = new Schema({
     description: { type: String, require: true },
     seller: { type: String, require: true },
     buyer: { type: String, require: true },
+    initiator: { type: String, require: true },
     messages: [
         {
             author: String,
-            message: String,
-            date: {
-                type: Date, default: Date.now
-            }
+            message: String
         }
     ],
     status: { type: String, require: true },
     tax: { type: Number, require: true },
     orderAmount: { type: Number, require: true },
-    totalAmount: { type: Number, require: true },
-    date: { type: Date, default: Date.now }
+    totalAmount: { type: Number, require: true }
 });
 
 const Order = mongoose.model('order', OrderSchema);
