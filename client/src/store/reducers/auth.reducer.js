@@ -50,6 +50,11 @@ export default (state = initialState, {type, payload}) => {
                 ...state,
                 loginReq: false
             }
+        case userTypes.USER_ADD_AMOUNT:
+            return {
+                ...state,
+                user: payload
+            }
         case userTypes.RESET_STATE:
             localStorage.removeItem('token')
             return {

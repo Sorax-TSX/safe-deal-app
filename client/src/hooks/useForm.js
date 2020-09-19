@@ -30,6 +30,7 @@ export const useForm = (initState, schemaFormData) => {
             }));
 
             callback(formData.values, errors);
+            setFormData(initState);
         }
     };
 

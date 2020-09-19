@@ -19,8 +19,9 @@ import Home from "../pages/Home/Home";
 import Login from "../pages/Auth/Login";
 import Register from "../pages/Auth/Register";
 import Balance from "../pages/Balance/Balance";
-import OrderList from "../pages/Orders/Orders";
-import OrderCreate from "../pages/Orders/OrderNew";
+import OrderList from "../pages/Deals/DealsList";
+import OrderCreate from "../pages/Deals/OrderNew";
+import Order from "../pages/Deals/Order";
 
 
 import "./App.scss";
@@ -55,9 +56,11 @@ const App = () => {
 
                       <GuestRoute path="/register" component={ Register }/>
 
-                      <PrivateRoute exact path="/orders" component={ OrderList } />
+                      <PrivateRoute exact path="/deals" component={ OrderList } />
 
-                      <PrivateRoute exact path="/orders/new" component={ OrderCreate } />
+                      <PrivateRoute path="/deals/new" component={ OrderCreate } />
+
+                      <PrivateRoute exact path="/deals/order/:id" component={ Order } />
 
                       <PrivateRoute exact path="/balance" component={ Balance } />
 

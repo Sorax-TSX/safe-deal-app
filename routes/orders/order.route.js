@@ -1,6 +1,4 @@
 const router = require('express').Router();
-const currency = require('currency.js');
-
 const authMiddleware = require('../../middlewares/auth.middleware');
 
 const modelUser = require('../../models/user.schema');
@@ -11,10 +9,9 @@ const modelOrder = require('../../models/order.schema');
  * @desc    Get order by id
  * @access  Public
  */
-router.get('/order/:id', authMiddleware, async (req, res) => {
+router.get('/order/:id&:login', authMiddleware, async (req, res) => {
     try {
-        const { login } = req.body;
-        const { id } = req.params;
+        const { id, login } = req.params;
         const order = await modelOrder.findById(id);
 
         if (!order) {
@@ -26,7 +23,7 @@ router.get('/order/:id', authMiddleware, async (req, res) => {
             return res.status(400).json({message: 'Access denied!'})
         }
 
-        res.json({ order })
+        res.json({ currentOrder: order })
     } catch (err) {
         throw err;
     }
@@ -68,6 +65,7 @@ router.get('/list/:login', authMiddleware, async (req, res) => {
     }
 });
 
+
 /**
  * @route   POST api/deal/new
  * @desc    Create new order
@@ -87,8 +85,7 @@ router.post('/new', authMiddleware, async (req, res) => {
 
         const initMessage = {
             author: 'Safe Deal',
-            message: "Order has been successfully created. Order is in confirmation status, wait for confirmation from the second participant.",
-            date: Date.now()
+            message: "Order has been successfully created. Order is in confirmation status, wait for confirmation from the seller."
         }
 
         const orderAmount = Number(amount);
@@ -99,12 +96,12 @@ router.post('/new', authMiddleware, async (req, res) => {
             description,
             seller: role === 'seller' ? initiator : partnerLogin,
             buyer: role === 'buyer' ? initiator : partnerLogin,
+            initiator,
             messages: [initMessage],
             status: "Confirmation",
             tax,
             orderAmount,
-            totalAmount,
-            date: Date.now()
+            totalAmount
         })
 
         await newOrder.save();

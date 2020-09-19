@@ -13,7 +13,7 @@ const GuestNavBlock = () => (
   </Navbar.Collapse>
 )
 
-const UserNavBlock = ({name}) => {
+const UserNavBlock = ({user}) => {
 
   const handleClick = (event) => {
       event.preventDefault();
@@ -22,11 +22,11 @@ const UserNavBlock = ({name}) => {
 
   return (
     <>
-        <Link to="/orders" className="nav-link">My Deals</Link>
-        <Link to="/balance" className="nav-link">Balance: 0 USD</Link>
+        <Link to="/deals" className="nav-link">My Deals</Link>
+        <Link to="/balance" className="nav-link">Balance: {user.amount} USD</Link>
         <Nav.Link href="/logout" className="nav-link" onClick={handleClick}>Logout</Nav.Link>
         <Navbar.Collapse className="justify-content-end">
-            <Navbar.Text>Signed in as: {name.toUpperCase()}</Navbar.Text>
+            <Navbar.Text>Signed in as: {user.login.toUpperCase()}</Navbar.Text>
         </Navbar.Collapse>
     </>
   )
@@ -38,7 +38,7 @@ const NavBar =({auth}) => {
           <Navbar bg="dark" variant="dark">
               <Container>
                   <Navbar.Brand><Link to="/">Safe Deal</Link></Navbar.Brand>
-                  {auth && auth.isAuthenticated ? <UserNavBlock name={auth.user.login}/> : <GuestNavBlock/>}
+                  {auth && auth.isAuthenticated ? <UserNavBlock user={auth.user}/> : <GuestNavBlock/>}
               </Container>
           </Navbar>
       </header>
