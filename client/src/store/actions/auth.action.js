@@ -79,6 +79,24 @@ export const registerUser = ({login, email, password}) => {
     }
 }
 
+export const addAmount = ({login, amount}) => {
+
+    return (dispatch, getState) => {
+
+        const body = JSON.stringify({login, amount});
+
+        axios.post('/api/user/balance/add', body, tokenConfig(getState))
+            .then(res => {
+                    dispatch({type: userTypes.USER_ADD_AMOUNT, payload: res.data.updatingUser});
+                    dispatch(alertAction.success(res.data.message));
+                }
+            )
+            .catch(err => {
+                dispatch(alertAction.error(err.response.data.message));
+            });
+    }
+}
+
 export const logoutUser = () => ({
    type: userTypes.RESET_STATE
 });

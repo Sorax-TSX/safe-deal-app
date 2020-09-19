@@ -1,4 +1,4 @@
-.orders {
+.deals {
   color: #fff;
   position: relative;
   padding: 20px 50px;
@@ -58,5 +58,63 @@
     display: flex;
     justify-content: space-evenly;
     margin-bottom: 20px;
+  }
+}
+
+.order {
+  display: contents;
+  flex: 1;
+  justify-content: space-between;
+  color: white;
+
+  .title {
+    display: block;
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 30px;
+  }
+
+  &__info {
+    width: 400px;
+    padding: 20px;
+    background-color: #999;
+    text-align: center;
+    position: relative;
+
+    .order-status {
+      position: absolute;
+      top: 0;
+      left: 0;
+      padding: 10px;
+      border-radius: 0;
+    }
+  }
+
+  &__chat {
+    flex: 1;
+    width: 500px;
+    padding: 20px;
+    background-color: #999;
+
+    .chat__body {
+      height: 250px;
+      overflow: auto;
+      background-color: white;
+
+      .chat-message {
+        margin: 10px;
+        padding: 10px;
+        position: relative;
+
+        .author {
+          color: #0099ff;
+        }
+      }
+    }
+
+    .chat__footer {
+      margin-top: 30px;
+    }
+
   }
 }

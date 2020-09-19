@@ -7,23 +7,7 @@ import {Link} from "react-router-dom";
 import {Container, Table, Badge} from "react-bootstrap";
 
 import "./Orders.scss";
-
-const getVariant = (status) => {
-    switch (status) {
-        case 'Confirmation':
-            return 'info'
-        case 'Not Paid':
-            return 'warning'
-        case 'Paid':
-            return 'primary'
-        case 'Completed':
-            return 'success'
-        case 'Canceled':
-            return 'danger'
-        default:
-            return null
-    }
-}
+import { getVariant } from "../../hooks/helpers";
 
 const OrderItem = ({ index, description, status, amount, partner, onClick}) => {
     const variantStatus = getVariant(status);
@@ -39,21 +23,21 @@ const OrderItem = ({ index, description, status, amount, partner, onClick}) => {
 }
 
 
-const Orders = ({ orders, login, loadDealsList }) => {
+const DealsList = ({ orders, login, loadDealsList }) => {
     const history = useHistory();
 
-    React.useEffect( () => loadDealsList({login}), [])
+    React.useEffect( () => loadDealsList({login}), [loadDealsList, login])
 
-    const orderHandler = (id) => () => history.push(`/orders/${id}`);
+    const orderHandler = (id) => () => history.push(`/deals/order/${id}`);
 
     return (
       <Container>
-          <div className="orders bg-dark">
-              <div className="orders__head">
+          <div className="deals bg-dark">
+              <div className="deals__head">
                   <h3>Orders list</h3>
-                  <Link to="/orders/new" className="create-order-link">Create new order</Link>
+                  <Link to="/deals/new" className="create-order-link">Create new order</Link>
               </div>
-              <div className="orders__body">
+              <div className="deals__body">
                   {!orders.length ? <>Order list is empty</> : <Table className="orders-list" striped bordered hover variant="dark" responsive="sm">
                       <thead>
                       <tr>
@@ -91,5 +75,5 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, { loadDealsList })(
-    Orders
+    DealsList
 );

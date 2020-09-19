@@ -44,9 +44,9 @@ const OrderCreate = React.memo(({login, createNewDeal, createSuccess = false}) =
 
     React.useEffect(() => {
         if (createSuccess) {
-            history.push('/')
+            history.push('/deals')
         }
-    }, [createSuccess])
+    }, [createSuccess, history])
 
     return (
         <div className="order-create bg-dark">

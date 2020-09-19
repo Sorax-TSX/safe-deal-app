@@ -14,7 +14,7 @@ const Home = () => {
                     <Card.Text>
                        This type of service was created to securely conduct transactions between sellers and buyers.
                     </Card.Text>
-                    <Link to="/orders/new">
+                    <Link to="/deals/new">
                        <Button variant="outline-info">Create New Deal</Button>
                     </Link>
                  </Card.Body>

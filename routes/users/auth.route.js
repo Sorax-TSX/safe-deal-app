@@ -71,6 +71,33 @@ router.post('/register', async (req, res) => {
 });
 
 /**
+ * @route   POST api/auth/login
+ * @desc    Login user
+ * @access  Public
+ */
+router.post('/balance/add', async (req, res) => {
+    try {
+        const { login, amount } = req.body;
+        const updatingUser = await modelUser.findOne({ login });
+        if (!updatingUser) {
+            return res.status(400).json({ message: 'User not found -_-' });
+        }
+
+        if (updatingUser.amount >= 100000) {
+            return res.status(400).json({ message: 'I think that\'s enough for you ;-)' });
+        }
+
+        updatingUser.amount += Math.floor(amount);
+        updatingUser.save()
+
+        res.status(201).json({updatingUser, message: "Balance has been updating!" });
+
+    } catch (err) {
+        throw err;
+    }
+});
+
+/**
  * @route   GET api/auth/user
  * @desc    Get user data
  * @access  Private
